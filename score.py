@@ -13,8 +13,7 @@ def init():
 
 def run(input_data):
     
-    data = pd.read_json(input_data, orient='columns')
-    print(data)
+    data = pd.read_json(input_data, orient='records')
     # make prediction
 
     out = model.predict(data)

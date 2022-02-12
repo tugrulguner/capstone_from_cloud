@@ -10,14 +10,6 @@ from azureml.core.workspace import Workspace
 
 def main():
 
-    ws = Workspace.from_config()
-
-    key = "Mobile Phone Data"
-
-    dataset = ws.datasets[key] 
-
-    ds = dataset.to_pandas_dataframe()
-
     # Add arguments to script
     parser = argparse.ArgumentParser()
 
@@ -33,7 +25,8 @@ def main():
     run.log("criterion:", np.str(args.criterion))
     run.log("max_depth:", np.int(args.max_depth))
 
-    y = ds.pop['price_range']
+    ds = pd.read_csv('train.csv')
+    y = ds.pop('price_range')
 
     x_train, x_test, y_train, y_test = train_test_split(ds,y,test_size=0.1)
 
